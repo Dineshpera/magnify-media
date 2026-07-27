@@ -1,3 +1,74 @@
-import ThreeHero from '@/components/three-hero';import { Magnetic,Reveal } from '@/components/motion';import { faqs,industries,posts,services,work } from '@/lib/data';import Link from 'next/link';import { ArrowRight } from 'lucide-react';
-function Section({title,kicker,children}:{title:string;kicker:string;children:React.ReactNode}){return <section className="section container"><Reveal><p className="eyebrow">{kicker}</p><h2 className="h2">{title}</h2></Reveal>{children}</section>}
-export default function Home(){return <main><section className="container" style={{minHeight:'86vh',display:'grid',gridTemplateColumns:'1.1fr .9fr',alignItems:'center',gap:24,position:'relative'}}><div className="orb" style={{width:360,height:360,background:'var(--hot)',left:-80,top:80}}/><Reveal><p className="eyebrow">Growth systems for category leaders</p><h1 className="h1">Make your brand impossible to ignore.</h1><p className="muted" style={{fontSize:22,maxWidth:680}}>Magnify Media blends strategy, cinematic creative, performance marketing, AI automation, and conversion-grade web engineering.</p><div style={{display:'flex',gap:12,marginTop:28,flexWrap:'wrap'}}><Magnetic><Link className="btn primary" href="/contact">Book a growth sprint <ArrowRight size={18}/></Link></Magnetic><Link className="btn glass" href="/portfolio">See the work</Link></div></Reveal><div className="glass" style={{height:520,borderRadius:40,overflow:'hidden'}}><ThreeHero/></div></section><Section kicker="Trusted by ambitious teams" title="Built for founders, CMOs, and operators who need beautiful work that moves revenue."><div className="grid-auto">{['Vanta','Northstar','Helio','Aperture','Cedar','Monarch'].map(x=><div className="glass card" key={x}>{x}</div>)}</div></Section><Section kicker="Metrics" title="A measurable creative operating system."><div className="grid-auto">{['214% lead growth','38% lower CAC','95+ Lighthouse target','12M video views'].map(x=><div className="glass card" key={x}><h3>{x}</h3><p className="muted">Compounding gains across search, media, creative, and product experience.</p></div>)}</div></Section><Section kicker="Services" title="One senior team for every growth-critical touchpoint."><div className="grid-auto">{services.map(([slug,name,desc,Icon])=><Link className="glass card" href={`/services/${slug}`} key={slug}><Icon/><h3>{name}</h3><p className="muted">{desc}</p></Link>)}</div></Section><Section kicker="Industries" title="Deep pattern recognition across high-trust markets."><div className="grid-auto">{industries.map(i=><Link className="glass card" href="/industries" key={i}>{i}</Link>)}</div></Section><Section kicker="Portfolio" title="Launches, campaigns, and platforms with presence."><div className="grid-auto">{work.map(w=><Link className="glass card" href={`/portfolio/${w.slug}`} key={w.slug}><p className="eyebrow">{w.cat}</p><h3>{w.title}</h3><p>{w.metric}</p></Link>)}</div></Section><Section kicker="Process" title="Strategy first. Systems always. Craft everywhere."><div className="grid-auto">{['Diagnose','Design','Deploy','Compound'].map((x,i)=><div className="glass card" key={x}><p className="eyebrow">0{i+1}</p><h3>{x}</h3><p className="muted">Senior-led workshops, rapid prototyping, sprint delivery, and performance intelligence.</p></div>)}</div></Section><Section kicker="Technology" title="Modern stack, accessible foundations, and motion that respects performance."><p className="muted">Next.js 15, React 19, Tailwind v4, Framer Motion, GSAP-ready animation architecture, Three.js, Lenis, MDX, Zod, and structured SEO.</p></Section><Section kicker="Testimonials" title="The work feels premium because the outcomes are premium."><div className="glass card"><p style={{fontSize:28}}>“Magnify gave us the strategy of a consultancy and the craft of a world-class studio.”</p><p className="muted">— Maya Chen, CEO</p></div></Section><Section kicker="FAQ" title="Clear answers before the first call."><div className="grid-auto">{faqs.map(f=><details className="glass card" key={f}><summary>{f}</summary><p className="muted">We tailor scope, team, and cadence to your business goals with transparent success metrics.</p></details>)}</div></Section><Section kicker="CTA" title="Ready to build the brand engine your market remembers?"><Link className="btn primary" href="/contact">Start the conversation</Link></Section></main>}
+import ThreeHero from '@/components/three-hero';
+import Link from 'next/link';
+import { ArrowRight, BrainCircuit, LineChart, Radar, Sparkles } from 'lucide-react';
+import { Magnetic, Reveal } from '@/components/motion';
+import { services, work } from '@/lib/data';
+
+function Section({ title, kicker, children, className = '' }: { title: string; kicker: string; children: React.ReactNode; className?: string }) {
+  return (
+    <section className={`section container ${className}`}>
+      <Reveal>
+        <p className="eyebrow">{kicker}</p>
+        <h2 className="h2">{title}</h2>
+      </Reveal>
+      {children}
+    </section>
+  );
+}
+
+const commandMetrics = ['Signal quality 94%', 'Creative velocity 3.8×', 'Pipeline lift +214%', 'CAC efficiency −38%'];
+
+export default function Home() {
+  return (
+    <main>
+      <section className="container hero-section">
+        <div className="orb hero-orb" />
+        <Reveal>
+          <p className="eyebrow">AI-native growth systems for category leaders</p>
+          <h1 className="h1">Make your brand impossible to ignore.</h1>
+          <p className="hero-copy muted">
+            Magnify Media builds cinematic brand worlds, conversion-grade websites, and AI-powered demand engines for teams that need presence and performance.
+          </p>
+          <div className="button-row">
+            <Magnetic><Link className="btn primary" href="/contact">Book a growth sprint <ArrowRight size={18} /></Link></Magnetic>
+            <Link className="btn glass" href="/case-studies">Explore proof</Link>
+          </div>
+        </Reveal>
+        <div className="glass hero-visual" aria-label="Interactive Magnify Media growth orb"><ThreeHero /></div>
+      </section>
+
+      <Section kicker="Growth Engine" title="Brand, AI, and data working as one operating system.">
+        <div className="growth-system glass card">
+          {[['01', 'Brand gravity', 'A sharp story system that makes your category position instantly legible.'], ['02', 'AI content intelligence', 'Research, briefs, variants, and distribution loops accelerated without losing taste.'], ['03', 'Revenue telemetry', 'Dashboards that connect creative decisions to pipeline, CAC, and retention.']].map(([n, t, d]) => (
+            <div className="growth-node" key={n}><span>{n}</span><h3>{t}</h3><p className="muted">{d}</p></div>
+          ))}
+        </div>
+      </Section>
+
+      <Section kicker="Services" title="Strategic capabilities designed around attention, trust, and revenue.">
+        <div className="grid-auto premium-cards">{services.slice(0, 5).map(([slug, name, desc, Icon]) => <Link className="glass card service-card" href={`/services/${slug}`} key={slug}><Icon /><h3>{name}</h3><p className="muted">{desc}</p></Link>)}</div>
+      </Section>
+
+      <Section kicker="AI Command Center" title="A premium dashboard experience for the decisions that compound growth.">
+        <div className="command-center glass card">
+          <div><p className="eyebrow">Live intelligence layer</p><h3>From market signal to published asset to revenue impact.</h3><p className="muted">Campaign planning, content scoring, funnel diagnostics, and executive reporting in one calm interface.</p></div>
+          <div className="metric-stack">{commandMetrics.map((metric) => <div key={metric}><Sparkles size={16} />{metric}</div>)}</div>
+          <div className="radar-panel"><Radar /><BrainCircuit /><LineChart /></div>
+        </div>
+      </Section>
+
+      <Section kicker="Case Studies" title="Story-driven work with strategy, execution, and measurable outcomes.">
+        <div className="grid-auto">{work.map((item) => <Link className="glass card case-card" href={`/case-studies/${item.slug}`} key={item.slug}><p className="eyebrow">{item.cat}</p><h3>{item.title}</h3><p><strong>Problem:</strong> {item.problem}</p><p><strong>Strategy:</strong> {item.strategy}</p><p><strong>Execution:</strong> {item.execution}</p><p className="result">{item.metric}</p></Link>)}</div>
+      </Section>
+
+      <section className="container section final-cta">
+        <div className="glass card">
+          <p className="eyebrow">Final CTA</p>
+          <h2 className="h2">Build the brand engine your market remembers.</h2>
+          <p className="muted">Bring us the ambition. We will turn it into a premium digital experience and a measurable growth system.</p>
+          <Link className="btn primary" href="/contact">Start the conversation <ArrowRight size={18} /></Link>
+        </div>
+      </section>
+    </main>
+  );
+}

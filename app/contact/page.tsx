@@ -1,46 +1,55 @@
 'use client';
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
+import { useState } from 'react';
 
-const schema = z.object({
-  name: z.string().min(2, 'Please enter your name.'),
-  email: z.string().email('Please enter a valid email.'),
-  budget: z.string().min(1, 'Please select or describe a budget.'),
-  message: z.string().min(10, 'Tell us a little more about the opportunity.'),
-});
+type Field = 'name' | 'email' | 'budget' | 'message';
 
-type Form = z.infer<typeof schema>;
+const fields: { name: Field; label: string; placeholder: string; multiline?: boolean }[] = [
+  { name: 'name', label: 'Name', placeholder: 'Your name' },
+  { name: 'email', label: 'Work email', placeholder: 'you@company.com' },
+  { name: 'budget', label: 'Investment range', placeholder: '$15k–$50k, $50k+, or retained growth partner' },
+  { name: 'message', label: 'Opportunity', placeholder: 'Tell us about the launch, growth target, or system you want to build.', multiline: true },
+];
 
 export default function Page() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitSuccessful },
-  } = useForm<Form>({ resolver: zodResolver(schema) });
+  const [sent, setSent] = useState(false);
 
   return (
-    <main className="container section">
+    <main className="container section page-shell">
       <p className="eyebrow">Contact</p>
       <h1 className="h1">Start your growth sprint.</h1>
-      <div className="grid-auto">
-        <form className="glass card" onSubmit={handleSubmit(() => undefined)} noValidate>
-          {(['name', 'email', 'budget', 'message'] as const).map((field) => (
-            <label key={field} style={{ display: 'block', marginBottom: 14, textTransform: 'capitalize' }}>
-              {field}
-              <input {...register(field)} className="glass" style={{ display: 'block', width: '100%', padding: 14, borderRadius: 14, color: 'var(--fg)' }} />
-              <small>{errors[field]?.message}</small>
+      <div className="grid-auto contact-grid">
+        <form
+          className="glass card contact-form"
+          onSubmit={(event) => {
+            event.preventDefault();
+            setSent(true);
+          }}
+        >
+          {fields.map((field) => (
+            <label key={field.name} className="field-label">
+              {field.label}
+              {field.multiline ? (
+                <textarea name={field.name} className="field-input" placeholder={field.placeholder} required minLength={10} />
+              ) : (
+                <input
+                  name={field.name}
+                  className="field-input"
+                  placeholder={field.placeholder}
+                  required
+                  type={field.name === 'email' ? 'email' : 'text'}
+                />
+              )}
             </label>
           ))}
-          <button className="btn primary">Send inquiry</button>
-          {isSubmitSuccessful && <p>Thanks — we will respond within one business day.</p>}
+          <button className="btn primary" type="submit">Send inquiry</button>
+          {sent && <p className="success-note">Thanks — we will respond within one business day.</p>}
         </form>
-        <aside className="glass card">
-          <h2>Office</h2>
-          <p className="muted">Remote-first · US compatible hours</p>
-          <a className="btn primary" href="https://wa.me/10000000000">WhatsApp</a>
-          <p className="muted">Calendly and Google Maps integration points are reserved for production environment variables.</p>
+        <aside className="glass card contact-aside">
+          <p className="eyebrow">Response window</p>
+          <h2>Senior team, no sales theatre.</h2>
+          <p className="muted">Share the ambition. We will respond with the clearest next sprint, success metrics, and team shape.</p>
+          <a className="btn glass" href="mailto:hello@magnifymedia.example">hello@magnifymedia.example</a>
         </aside>
       </div>
     </main>
