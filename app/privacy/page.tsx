@@ -1,0 +1,1 @@
+export default function Page(){return <main className="container section"><p className="eyebrow">Privacy</p><h1 className="h1">Privacy Policy</h1><p className="muted">We collect only the information needed to respond to inquiries, operate services, and improve the website.</p></main>}

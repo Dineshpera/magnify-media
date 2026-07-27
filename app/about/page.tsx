@@ -1,0 +1,1 @@
+export default function Page(){return <main className="container section"><p className="eyebrow">About</p><h1 className="h1">A senior studio for modern growth.</h1><p className="muted">We combine brand strategy, creative direction, performance media, and engineering into one accountable team.</p></main>}

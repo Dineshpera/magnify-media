@@ -1,0 +1,1 @@
+export default function Page(){return <main className="container section"><p className="eyebrow">Careers</p><h1 className="h1">Join a craft-obsessed growth team.</h1><p className="muted">We hire senior strategists, designers, engineers, editors, and media operators.</p></main>}
