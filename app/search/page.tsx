@@ -1,0 +1,1 @@
+export default function Page(){return <main className="container section"><p className="eyebrow">Search</p><h1 className="h1">Find insight faster.</h1><input className="glass card" style={{width:'100%',color:'var(--fg)'}} placeholder="Search services, work, posts..."/><p className="muted">Client-side search integration point for indexed content.</p></main>}

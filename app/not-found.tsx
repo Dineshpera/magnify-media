@@ -1,0 +1,1 @@
+import Link from 'next/link';export default function NotFound(){return <main className="container section"><p className="eyebrow">404</p><h1 className="h1">Lost in the signal.</h1><p className="muted">The page moved, but momentum did not.</p><Link className="btn primary" href="/">Return home</Link></main>}

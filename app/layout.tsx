@@ -1,0 +1,3 @@
+import './globals.css';import type { Metadata } from 'next';import { Footer,Nav,Providers } from '@/components/site';
+export const metadata:Metadata={metadataBase:new URL('https://magnifymedia.example'),title:{default:'Magnify Media — Premium Growth & Creative Agency',template:'%s · Magnify Media'},description:'Enterprise-grade digital marketing, brand, content, video, and web experiences engineered for measurable growth.',openGraph:{title:'Magnify Media',description:'Premium growth agency',type:'website'},twitter:{card:'summary_large_image'}};
+export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="en" suppressHydrationWarning><body><Providers><Nav/>{children}<Footer/></Providers></body></html>}
