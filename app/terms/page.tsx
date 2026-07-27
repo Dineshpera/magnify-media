@@ -1,0 +1,1 @@
+export default function Page(){return <main className="container section"><p className="eyebrow">Terms</p><h1 className="h1">Terms of Use</h1><p className="muted">Website content is provided for informational purposes and does not create a client relationship until a signed agreement is in place.</p></main>}
